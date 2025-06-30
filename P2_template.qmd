@@ -28,25 +28,32 @@ execute:
 ```{python}
 import os
 
-os.getcwd()
-from p2_source import *
+_ = os.getcwd()
 
+from p2_source import table_data
+
+table_data
 ```
 
 ## Source code
 __source code available at [p2_source.py](/p2_source.py)__
 
-```{python}
-
-```
-
 ## QUESTION|TASK 1
 
 __Write an SQL query to create a new dataframe about baseball players who attended BYU-Idaho. The new table should contain five columns: playerID, schoolID, salary, and the yearID/teamID associated with each salary. Order the table by salary (highest to lowest) and print out the table in your report.__  
 
-_type your results and analysis here_
+_Looks like there were many duplicate rows that matched the join conditions of my query that joined the people, collegePlaying, schools, salaries, and teams tables, so I did a group by to just get the unique rows_
+
 
 ```{python}
+from p2_source import q1_query
+
+q1_query
+```
+```{python}
+from p2_source import q1_data
+
+q1_data
 
 ```
 
