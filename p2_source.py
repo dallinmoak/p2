@@ -126,9 +126,23 @@ WHERE
 GROUP BY
   teams.teamID
 HAVING
-  "lifetime_park_changes" >= 1
+  "lifetime_park_changes" >= 5
+  AND "total_years_active" >= 10
 ORDER BY
-  "park_changes_100_year_average" ASC;
+  "park_changes_100_year_average" DESC;
 """
 
 q3_data = pd.read_sql_query(q3_query, db)
+
+q3_plot = (
+    ggplot(
+        data=q3_data,
+        mapping=aes(x="name", y="park_changes_100_year_average", fill="name"),
+    )
+    + geom_bar(stat="identity")
+    + labs(
+        title="Average Park Changes per 100 Years by Team",
+        x="Team Name",
+        y="Park Changes per 100 Years",
+    )
+)

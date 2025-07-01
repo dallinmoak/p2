@@ -92,12 +92,18 @@ q2c_data
 
 __Pick any two baseball teams and compare them using a metric of your choice (average salary, home runs, number of wins, etc). Write an SQL query to get the data you need, then make a graph using Lets-Plot to visualize the comparison. What do you learn?__
 
-_type your results and analysis here_
+_Many people might look up team info based on some kind of outcome in competition. I, however, was interested in a different metric: I decided to see how often teams changed the name of their parks through the years and queried for some of the long-running and frequently park-changing teams by looking for teams that were active for at least ten years and changed their park at least 5 times. Interestingly, there is a non-zero amount of teams that changed their park more than once a decade on average while active_
 
 ```{python}
 from p2_source import q3_data
 
 q3_data
+```
+
+```{python}
+from p2_source import q3_plot
+
+q3_plot
 ```
 
 ---
