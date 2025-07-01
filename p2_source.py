@@ -37,3 +37,98 @@ GROUP BY
 """
 
 q1_data = pd.read_sql_query(q1_query, db)
+
+q2a_query = """
+SELECT
+  batting.playerID,
+  (people.nameFirst || ' ' || people.nameLast) AS "Player Name",
+  teams.name,
+  batting.yearID,
+  batting.AB AS "At Bats",
+  batting.H AS "Hits",
+  CAST(batting.H AS FLOAT) / CAST(batting.AB AS FLOAT) AS "Batting Average"
+FROM
+  batting
+  INNER JOIN people ON batting.playerID = people.playerID
+  INNER JOIN teams ON batting.team_ID = teams.ID
+WHERE
+  batting.AB >= 1
+ORDER BY
+  "Batting Average" DESC,
+  batting.playerID ASC
+LIMIT
+  5;
+"""
+
+q2a_data = pd.read_sql_query(q2a_query, db)
+
+
+q2b_query = """
+SELECT
+  batting.playerID,
+  (people.nameFirst || ' ' || people.nameLast) AS "Player Name",
+  teams.name,
+  batting.yearID,
+  batting.AB AS "At Bats",
+  batting.H AS "Hits",
+  CAST(batting.H AS FLOAT) / CAST(batting.AB AS FLOAT) AS "Batting Average"
+FROM
+  batting
+  INNER JOIN people ON batting.playerID = people.playerID
+  INNER JOIN teams ON batting.team_ID = teams.ID
+WHERE
+  batting.AB >= 10
+ORDER BY
+  "Batting Average" DESC,
+  batting.playerID ASC
+LIMIT
+  5;
+"""
+
+q2b_data = pd.read_sql_query(q2b_query, db)
+
+q2c_query = """
+SELECT
+  batting.playerID,
+  (people.nameFirst || ' ' || people.nameLast) AS "Player Name",
+  SUM(batting.AB) AS "Total At Bats",
+  SUM(batting.H) AS "Total Hits",
+  CAST(SUM(batting.H) AS FLOAT) / CAST(SUM(batting.AB) AS FLOAT) AS "Career Batting Average"
+FROM
+  batting
+  INNER JOIN people ON batting.playerID = people.playerID
+GROUP BY
+  batting.playerID,
+  people.nameFirst,
+  people.nameLast
+HAVING
+  "Total At Bats" >= 100
+ORDER BY
+  "Career Batting Average" DESC,
+  batting.playerID ASC
+LIMIT
+  5;
+"""
+
+q2c_data = pd.read_sql_query(q2c_query, db)
+
+q3_query = """
+SELECT
+  teams.teamID,
+  teams.name,
+  COUNT(DISTINCT teams.park) - 1 AS "lifetime_park_changes",
+  COUNT(*) AS "total_years_active",
+  CAST(COUNT(DISTINCT teams.park) AS FLOAT) / COUNT(*) * 100 AS "park_changes_100_year_average"
+FROM
+  teams
+WHERE
+  teams.park IS NOT NULL
+GROUP BY
+  teams.teamID
+HAVING
+  "lifetime_park_changes" >= 1
+ORDER BY
+  "park_changes_100_year_average" ASC;
+"""
+
+q3_data = pd.read_sql_query(q3_query, db)

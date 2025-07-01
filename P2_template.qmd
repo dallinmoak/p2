@@ -60,24 +60,32 @@ q1_data
 
 ## QUESTION|TASK 2
 
-__This three-part question requires you to calculate batting average (number of hits divided by the number of at-bats)__  
-    a. Write an SQL query that provides playerID, yearID, and batting average for players with at least 1 at bat that year. Sort the table from highest batting average to lowest, and then by playerid alphabetically. Show the top 5 results in your report.  
-    a. Use the same query as above, but only include players with at least 10 at bats that year. Print the top 5 results.  
-    a. Now calculate the batting average for players over their entire careers (all years combined). Only include players with at least 100 at bats, and print the top 5 results.  
+__This three-part question requires you to calculate batting average (number of hits divided by the number of at-bats)__ 
 
-_type your results and analysis here_
+a. Write an SQL query that provides playerID, yearID, and batting average for players with at least 1 at bat that year. Sort the table from highest batting average to lowest, and then by playerid alphabetically. Show the top 5 results in your report.
 
 ```{python}
+from p2_source import q2a_data
 
+q2a_data
 ```
+
+b. Use the same query as above, but only include players with at least 10 at bats that year. Print the top 5 results.
 
 ```{python}
+from p2_source import q2b_data
 
+q2b_data
 ```
+
+c. Now calculate the batting average for players over their entire careers (all years combined). Only include players with at least 100 at bats, and print the top 5 results.
 
 ```{python}
+from p2_source import q2c_data
 
+q2c_data
 ```
+
 
 
 ## QUESTION|TASK 3
@@ -87,7 +95,9 @@ __Pick any two baseball teams and compare them using a metric of your choice (av
 _type your results and analysis here_
 
 ```{python}
+from p2_source import q3_data
 
+q3_data
 ```
 
 ---

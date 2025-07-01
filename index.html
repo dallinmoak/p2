@@ -2221,7 +2221,7 @@ vertical-align: -.125em;
   <li><a href="#stretch-questiontask-2" id="toc-stretch-questiontask-2">STRETCH QUESTION|TASK 2</a></li>
   </ul>
 </nav>
-<div id="54d2a739" class="cell" data-execution_count="1">
+<div id="c9f2c387" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
@@ -2232,7 +2232,7 @@ vertical-align: -.125em;
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>table_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 
 
@@ -2494,25 +2494,25 @@ vertical-align: -.125em;
 <h2 class="anchored" data-anchor-id="questiontask-1">QUESTION|TASK 1</h2>
 <p><strong>Write an SQL query to create a new dataframe about baseball players who attended BYU-Idaho. The new table should contain five columns: playerID, schoolID, salary, and the yearID/teamID associated with each salary. Order the table by salary (highest to lowest) and print out the table in your report.</strong></p>
 <p><em>Looks like there were many duplicate rows that matched the join conditions of my query that joined the people, collegePlaying, schools, salaries, and teams tables, so I did a group by to just get the unique rows</em></p>
-<div id="def636f5" class="cell" data-execution_count="2">
+<div id="12611aa7" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> p2_source <span class="im">import</span> q1_query</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>q1_query</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>&#39;\nSELECT\n  (people.nameFirst || \&#39; \&#39; || people.nameLast) AS &quot;Player Name&quot;,\n  schools.name_full AS School,\n  salaries.yearID as Year,\n  salaries.salary as Salary,\n  teams.name AS Team\nFROM\n  people\n  JOIN collegePlaying ON people.playerID = collegePlaying.playerID\n  JOIN schools ON collegePlaying.schoolID = schools.schoolID\n  JOIN salaries ON people.playerID = salaries.playerID\n  JOIN teams ON salaries.teamID = teams.teamID\nWHERE\n  schools.schoolID = &quot;idbyuid&quot;\nGROUP BY\n  people.playerID,\n  salaries.salary,\n  salaries.yearID,\n  salaries.teamID;\n&#39;</code></pre>
 </div>
 </div>
-<div id="e3429d5c" class="cell" data-execution_count="3">
+<div id="afae2836" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> p2_source <span class="im">import</span> q1_data</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>q1_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
 
@@ -2657,16 +2657,713 @@ vertical-align: -.125em;
 </section>
 <section id="questiontask-2" class="level2">
 <h2 class="anchored" data-anchor-id="questiontask-2">QUESTION|TASK 2</h2>
-<p><strong>This three-part question requires you to calculate batting average (number of hits divided by the number of at-bats)</strong><br>
-a. Write an SQL query that provides playerID, yearID, and batting average for players with at least 1 at bat that year. Sort the table from highest batting average to lowest, and then by playerid alphabetically. Show the top 5 results in your report.<br>
-a. Use the same query as above, but only include players with at least 10 at bats that year. Print the top 5 results.<br>
-a. Now calculate the batting average for players over their entire careers (all years combined). Only include players with at least 100 at bats, and print the top 5 results.</p>
-<p><em>type your results and analysis here</em></p>
+<p><strong>This three-part question requires you to calculate batting average (number of hits divided by the number of at-bats)</strong></p>
+<ol type="a">
+<li>Write an SQL query that provides playerID, yearID, and batting average for players with at least 1 at bat that year. Sort the table from highest batting average to lowest, and then by playerid alphabetically. Show the top 5 results in your report.</li>
+</ol>
+<div id="9f9d5bb9" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> p2_source <span class="im">import</span> q2a_data</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>q2a_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">playerID</th>
+<th data-quarto-table-cell-role="th">Player Name</th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">yearID</th>
+<th data-quarto-table-cell-role="th">At Bats</th>
+<th data-quarto-table-cell-role="th">Hits</th>
+<th data-quarto-table-cell-role="th">Batting Average</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>aberal01</td>
+<td>Al Aber</td>
+<td>Kansas City Athletics</td>
+<td>1957</td>
+<td>1</td>
+<td>1</td>
+<td>1.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>abernte02</td>
+<td>Ted Abernathy</td>
+<td>Washington Senators</td>
+<td>1960</td>
+<td>1</td>
+<td>1</td>
+<td>1.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>abramge01</td>
+<td>George Abrams</td>
+<td>Cincinnati Reds</td>
+<td>1923</td>
+<td>1</td>
+<td>1</td>
+<td>1.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>acklefr01</td>
+<td>Fritz Ackley</td>
+<td>Chicago White Sox</td>
+<td>1964</td>
+<td>1</td>
+<td>1</td>
+<td>1.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>alanirj01</td>
+<td>R. J. Alaniz</td>
+<td>Cincinnati Reds</td>
+<td>2019</td>
+<td>1</td>
+<td>1</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<ol start="2" type="a">
+<li>Use the same query as above, but only include players with at least 10 at bats that year. Print the top 5 results.</li>
+</ol>
+<div id="c06cb71c" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> p2_source <span class="im">import</span> q2b_data</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>q2b_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">playerID</th>
+<th data-quarto-table-cell-role="th">Player Name</th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">yearID</th>
+<th data-quarto-table-cell-role="th">At Bats</th>
+<th data-quarto-table-cell-role="th">Hits</th>
+<th data-quarto-table-cell-role="th">Batting Average</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>nymanny01</td>
+<td>Nyls Nyman</td>
+<td>Chicago White Sox</td>
+<td>1974</td>
+<td>14</td>
+<td>9</td>
+<td>0.642857</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>carsoma01</td>
+<td>Matt Carson</td>
+<td>Cleveland Indians</td>
+<td>2013</td>
+<td>11</td>
+<td>7</td>
+<td>0.636364</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>altizda01</td>
+<td>Dave Altizer</td>
+<td>Cincinnati Reds</td>
+<td>1910</td>
+<td>10</td>
+<td>6</td>
+<td>0.600000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>johnsde01</td>
+<td>Deron Johnson</td>
+<td>Boston Red Sox</td>
+<td>1975</td>
+<td>10</td>
+<td>6</td>
+<td>0.600000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>silvech01</td>
+<td>Charlie Silvera</td>
+<td>New York Yankees</td>
+<td>1948</td>
+<td>14</td>
+<td>8</td>
+<td>0.571429</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<ol start="3" type="a">
+<li>Now calculate the batting average for players over their entire careers (all years combined). Only include players with at least 100 at bats, and print the top 5 results.</li>
+</ol>
+<div id="5c65c817" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> p2_source <span class="im">import</span> q2c_data</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>q2c_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">playerID</th>
+<th data-quarto-table-cell-role="th">Player Name</th>
+<th data-quarto-table-cell-role="th">Total At Bats</th>
+<th data-quarto-table-cell-role="th">Total Hits</th>
+<th data-quarto-table-cell-role="th">Career Batting Average</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>cobbty01</td>
+<td>Ty Cobb</td>
+<td>11436</td>
+<td>4189</td>
+<td>0.366299</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>barnero01</td>
+<td>Ross Barnes</td>
+<td>2391</td>
+<td>860</td>
+<td>0.359682</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>hornsro01</td>
+<td>Rogers Hornsby</td>
+<td>8173</td>
+<td>2930</td>
+<td>0.358497</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>jacksjo01</td>
+<td>Shoeless Joe Jackson</td>
+<td>4981</td>
+<td>1772</td>
+<td>0.355752</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>meyerle01</td>
+<td>Levi Meyerle</td>
+<td>1443</td>
+<td>513</td>
+<td>0.355509</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 </section>
 <section id="questiontask-3" class="level2">
 <h2 class="anchored" data-anchor-id="questiontask-3">QUESTION|TASK 3</h2>
 <p><strong>Pick any two baseball teams and compare them using a metric of your choice (average salary, home runs, number of wins, etc). Write an SQL query to get the data you need, then make a graph using Lets-Plot to visualize the comparison. What do you learn?</strong></p>
 <p><em>type your results and analysis here</em></p>
+<div id="17bea173" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> p2_source <span class="im">import</span> q3_data</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>q3_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">teamID</th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">lifetime_park_changes</th>
+<th data-quarto-table-cell-role="th">total_years_active</th>
+<th data-quarto-table-cell-role="th">park_changes_100_year_average</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>BOS</td>
+<td>Boston Americans</td>
+<td>2</td>
+<td>119</td>
+<td>2.521008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>BAL</td>
+<td>Baltimore Orioles</td>
+<td>1</td>
+<td>66</td>
+<td>3.030303</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>LAN</td>
+<td>Los Angeles Dodgers</td>
+<td>1</td>
+<td>62</td>
+<td>3.225806</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>SLA</td>
+<td>St. Louis Browns</td>
+<td>1</td>
+<td>52</td>
+<td>3.846154</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>DET</td>
+<td>Detroit Tigers</td>
+<td>4</td>
+<td>119</td>
+<td>4.201681</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>CHA</td>
+<td>Chicago White Sox</td>
+<td>5</td>
+<td>119</td>
+<td>5.042017</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CLE</td>
+<td>Cleveland Blues</td>
+<td>5</td>
+<td>119</td>
+<td>5.042017</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>MIN</td>
+<td>Minnesota Twins</td>
+<td>2</td>
+<td>59</td>
+<td>5.084746</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>NYA</td>
+<td>New York Highlanders</td>
+<td>5</td>
+<td>117</td>
+<td>5.128205</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>NYN</td>
+<td>New York Mets</td>
+<td>2</td>
+<td>58</td>
+<td>5.172414</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>PIT</td>
+<td>Pittsburg Alleghenys</td>
+<td>6</td>
+<td>133</td>
+<td>5.263158</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>SLN</td>
+<td>St. Louis Browns</td>
+<td>6</td>
+<td>128</td>
+<td>5.468750</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>ATL</td>
+<td>Atlanta Braves</td>
+<td>2</td>
+<td>54</td>
+<td>5.555556</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>CHN</td>
+<td>Chicago White Stockings</td>
+<td>7</td>
+<td>144</td>
+<td>5.555556</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>PHA</td>
+<td>Philadelphia Athletics</td>
+<td>2</td>
+<td>54</td>
+<td>5.555556</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15</td>
+<td>PHI</td>
+<td>Philadelphia Quakers</td>
+<td>7</td>
+<td>137</td>
+<td>5.839416</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">16</td>
+<td>BRO</td>
+<td>Brooklyn Bridegrooms</td>
+<td>3</td>
+<td>68</td>
+<td>5.882353</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17</td>
+<td>KCA</td>
+<td>Kansas City Royals</td>
+<td>2</td>
+<td>51</td>
+<td>5.882353</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">18</td>
+<td>SDN</td>
+<td>San Diego Padres</td>
+<td>2</td>
+<td>51</td>
+<td>5.882353</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">19</td>
+<td>CIN</td>
+<td>Cincinnati Reds</td>
+<td>7</td>
+<td>130</td>
+<td>6.153846</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">20</td>
+<td>CAL</td>
+<td>California Angels</td>
+<td>1</td>
+<td>32</td>
+<td>6.250000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">21</td>
+<td>NY1</td>
+<td>New York Gothams</td>
+<td>4</td>
+<td>75</td>
+<td>6.666667</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">22</td>
+<td>WS1</td>
+<td>Washington Senators</td>
+<td>3</td>
+<td>60</td>
+<td>6.666667</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">23</td>
+<td>HOU</td>
+<td>Houston Colt .45&#39;s</td>
+<td>3</td>
+<td>58</td>
+<td>6.896552</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">24</td>
+<td>COL</td>
+<td>Colorado Rockies</td>
+<td>1</td>
+<td>27</td>
+<td>7.407407</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">25</td>
+<td>BSN</td>
+<td>Boston Red Caps</td>
+<td>5</td>
+<td>77</td>
+<td>7.792208</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">26</td>
+<td>MON</td>
+<td>Montreal Expos</td>
+<td>2</td>
+<td>36</td>
+<td>8.333333</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">27</td>
+<td>ARI</td>
+<td>Arizona Diamondbacks</td>
+<td>1</td>
+<td>22</td>
+<td>9.090909</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">28</td>
+<td>MIL</td>
+<td>Milwaukee Brewers</td>
+<td>1</td>
+<td>22</td>
+<td>9.090909</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">29</td>
+<td>SEA</td>
+<td>Seattle Mariners</td>
+<td>3</td>
+<td>43</td>
+<td>9.302326</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">30</td>
+<td>TOR</td>
+<td>Toronto Blue Jays</td>
+<td>3</td>
+<td>43</td>
+<td>9.302326</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">31</td>
+<td>OAK</td>
+<td>Oakland Athletics</td>
+<td>4</td>
+<td>52</td>
+<td>9.615385</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">32</td>
+<td>TEX</td>
+<td>Texas Rangers</td>
+<td>4</td>
+<td>48</td>
+<td>10.416667</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">33</td>
+<td>SFN</td>
+<td>San Francisco Giants</td>
+<td>6</td>
+<td>62</td>
+<td>11.290323</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">34</td>
+<td>WAS</td>
+<td>Washington Senators</td>
+<td>2</td>
+<td>23</td>
+<td>13.043478</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">35</td>
+<td>CL4</td>
+<td>Cleveland Spiders</td>
+<td>1</td>
+<td>11</td>
+<td>18.181818</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">36</td>
+<td>WS2</td>
+<td>Washington Senators</td>
+<td>1</td>
+<td>11</td>
+<td>18.181818</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">37</td>
+<td>FLO</td>
+<td>Florida Marlins</td>
+<td>3</td>
+<td>19</td>
+<td>21.052632</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">38</td>
+<td>LAA</td>
+<td>Los Angeles Angels</td>
+<td>3</td>
+<td>19</td>
+<td>21.052632</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">39</td>
+<td>ANA</td>
+<td>Anaheim Angels</td>
+<td>1</td>
+<td>8</td>
+<td>25.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">40</td>
+<td>BL2</td>
+<td>Baltimore Orioles</td>
+<td>1</td>
+<td>8</td>
+<td>25.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">41</td>
+<td>CN2</td>
+<td>Cincinnati Red Stockings</td>
+<td>1</td>
+<td>8</td>
+<td>25.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">42</td>
+<td>LS3</td>
+<td>Louisville Colonels</td>
+<td>1</td>
+<td>8</td>
+<td>25.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">43</td>
+<td>BFN</td>
+<td>Buffalo Bisons</td>
+<td>1</td>
+<td>7</td>
+<td>28.571429</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">44</td>
+<td>PH4</td>
+<td>Philadelphia Athletics</td>
+<td>2</td>
+<td>10</td>
+<td>30.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">45</td>
+<td>CN1</td>
+<td>Cincinnati Reds</td>
+<td>1</td>
+<td>5</td>
+<td>40.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">46</td>
+<td>NY4</td>
+<td>New York Metropolitans</td>
+<td>1</td>
+<td>5</td>
+<td>40.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">47</td>
+<td>PT1</td>
+<td>Pittsburg Alleghenys</td>
+<td>1</td>
+<td>5</td>
+<td>40.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">48</td>
+<td>BR2</td>
+<td>Brooklyn Atlantics</td>
+<td>1</td>
+<td>4</td>
+<td>50.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">49</td>
+<td>IN3</td>
+<td>Indianapolis Hoosiers</td>
+<td>1</td>
+<td>3</td>
+<td>66.666667</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">50</td>
+<td>TRN</td>
+<td>Troy Trojans</td>
+<td>2</td>
+<td>4</td>
+<td>75.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">51</td>
+<td>BL3</td>
+<td>Baltimore Orioles</td>
+<td>1</td>
+<td>2</td>
+<td>100.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">52</td>
+<td>HAR</td>
+<td>Hartford Dark Blues</td>
+<td>1</td>
+<td>2</td>
+<td>100.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">53</td>
+<td>KC2</td>
+<td>Kansas City Cowboys</td>
+<td>1</td>
+<td>2</td>
+<td>100.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 <hr>
 </section>
 <section id="stretch-questiontask-1" class="level2">
