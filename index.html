@@ -2221,7 +2221,7 @@ vertical-align: -.125em;
   <li><a href="#stretch-questiontask-2" id="toc-stretch-questiontask-2">STRETCH QUESTION|TASK 2</a></li>
   </ul>
 </nav>
-<div id="4f1e89f2" class="cell" data-execution_count="1">
+<div id="131f65a1" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
@@ -2232,7 +2232,7 @@ vertical-align: -.125em;
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>table_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 
 
@@ -2494,25 +2494,25 @@ vertical-align: -.125em;
 <h2 class="anchored" data-anchor-id="questiontask-1">QUESTION|TASK 1</h2>
 <p><strong>Write an SQL query to create a new dataframe about baseball players who attended BYU-Idaho. The new table should contain five columns: playerID, schoolID, salary, and the yearID/teamID associated with each salary. Order the table by salary (highest to lowest) and print out the table in your report.</strong></p>
 <p><em>Looks like there were many duplicate rows that matched the join conditions of my query that joined the people, collegePlaying, schools, salaries, and teams tables, so I did a group by to just get the unique rows</em></p>
-<div id="079f2054" class="cell" data-execution_count="2">
+<div id="7a9e4d31" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> p2_source <span class="im">import</span> q1_query</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>q1_query</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>&#39;\nSELECT\n  (people.nameFirst || \&#39; \&#39; || people.nameLast) AS &quot;Player Name&quot;,\n  schools.name_full AS School,\n  salaries.yearID as Year,\n  salaries.salary as Salary,\n  teams.name AS Team\nFROM\n  people\n  JOIN collegePlaying ON people.playerID = collegePlaying.playerID\n  JOIN schools ON collegePlaying.schoolID = schools.schoolID\n  JOIN salaries ON people.playerID = salaries.playerID\n  JOIN teams ON salaries.teamID = teams.teamID\nWHERE\n  schools.schoolID = &quot;idbyuid&quot;\nGROUP BY\n  people.playerID,\n  salaries.salary,\n  salaries.yearID,\n  salaries.teamID;\n&#39;</code></pre>
 </div>
 </div>
-<div id="88207e7b" class="cell" data-execution_count="3">
+<div id="1d886fa8" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> p2_source <span class="im">import</span> q1_data</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>q1_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="12">
 <div>
 
 
@@ -2661,14 +2661,14 @@ vertical-align: -.125em;
 <ol type="a">
 <li>Write an SQL query that provides playerID, yearID, and batting average for players with at least 1 at bat that year. Sort the table from highest batting average to lowest, and then by playerid alphabetically. Show the top 5 results in your report.</li>
 </ol>
-<div id="366d078a" class="cell" data-execution_count="4">
+<div id="1c345cb2" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> p2_source <span class="im">import</span> q2a_data</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>q2a_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="13">
 <div>
 
 
@@ -2745,14 +2745,14 @@ vertical-align: -.125em;
 <ol start="2" type="a">
 <li>Use the same query as above, but only include players with at least 10 at bats that year. Print the top 5 results.</li>
 </ol>
-<div id="5b2ff844" class="cell" data-execution_count="5">
+<div id="3eb78708" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> p2_source <span class="im">import</span> q2b_data</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>q2b_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="14">
 <div>
 
 
@@ -2829,14 +2829,14 @@ vertical-align: -.125em;
 <ol start="3" type="a">
 <li>Now calculate the batting average for players over their entire careers (all years combined). Only include players with at least 100 at bats, and print the top 5 results.</li>
 </ol>
-<div id="1a58b2fe" class="cell" data-execution_count="6">
+<div id="c34b99bc" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> p2_source <span class="im">import</span> q2c_data</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>q2c_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="15">
 <div>
 
 
@@ -2903,14 +2903,14 @@ vertical-align: -.125em;
 <h2 class="anchored" data-anchor-id="questiontask-3">QUESTION|TASK 3</h2>
 <p><strong>Pick any two baseball teams and compare them using a metric of your choice (average salary, home runs, number of wins, etc). Write an SQL query to get the data you need, then make a graph using Lets-Plot to visualize the comparison. What do you learn?</strong></p>
 <p><em>Many people might look up team info based on some kind of outcome in competition. I, however, was interested in a different metric: I decided to see how often teams changed the name of their parks through the years and queried for some of the long-running and frequently park-changing teams by looking for teams that were active for at least ten years and changed their park at least 5 times. Interestingly, there is a non-zero amount of teams that changed their park more than once a decade on average while active</em></p>
-<div id="b140be7c" class="cell" data-execution_count="7">
+<div id="80aad3bd" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> p2_source <span class="im">import</span> q3_data</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>q3_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="16">
 <div>
 
 
@@ -3012,14 +3012,14 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<div id="1340d681" class="cell" data-execution_count="8">
+<div id="7bad5402" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> p2_source <span class="im">import</span> q3_plot</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>q3_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div class="cell-output cell-output-display" data-execution_count="17">
 
    
        <meta charset="UTF-8">
@@ -3028,7 +3028,7 @@ vertical-align: -.125em;
 //# sourceMappingURL=lets-plot.js.map</script>
    
    
-          <div id="p7MLdo"></div>
+          <div id="r06iWR"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
@@ -3053,7 +3053,7 @@ vertical-align: -.125em;
        };
    }
    
-   const containerDiv = document.getElementById("p7MLdo");
+   const containerDiv = document.getElementById("r06iWR");
    let fig = null;
    
    function renderPlot() {
@@ -3183,7 +3183,125 @@ vertical-align: -.125em;
 <li><p>Order the table by average salary in descending order.</p></li>
 </ul>
 <p><strong>Hint:</strong> Beware, it is common for a player to play multiple positions in a single year. For this analysis, each player’s salary should only be counted toward one position in a given year: the position at which they played the most games that year. This will likely require a (sub-query)[https://docs.data.world/documentation/sql/concepts/advanced/WITH.html].</p>
-<p><em>type your results and analysis here</em></p>
+<p><em>I did a subquery within the fielding table to get the highest single row based on number of games played per player&amp;year, and then attached salary data to that. Looks like a lot of the instances of fielding don’t have salary records, so I only included rows that have salary data. next step is to do agregation on that info to get average salary by position. Of course I don’t know if those currency amounts are normalized for inflation or anything like that, so agregating that info over a long period is pretty meaningless</em></p>
+<div id="a4b867dd" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> p2_source <span class="im">import</span> s1_data</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>s1_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">playerID</th>
+<th data-quarto-table-cell-role="th">yearID</th>
+<th data-quarto-table-cell-role="th">POS</th>
+<th data-quarto-table-cell-role="th">G</th>
+<th data-quarto-table-cell-role="th">salary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>barkele01</td>
+<td>1985</td>
+<td>P</td>
+<td>20</td>
+<td>870000.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>bedrost01</td>
+<td>1985</td>
+<td>P</td>
+<td>37</td>
+<td>550000.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>benedbr01</td>
+<td>1985</td>
+<td>C</td>
+<td>70</td>
+<td>545000.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>campri01</td>
+<td>1985</td>
+<td>P</td>
+<td>66</td>
+<td>633333.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>ceronri01</td>
+<td>1985</td>
+<td>C</td>
+<td>91</td>
+<td>625000.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25473</td>
+<td>strasst01</td>
+<td>2016</td>
+<td>P</td>
+<td>24</td>
+<td>10400000.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">25474</td>
+<td>taylomi02</td>
+<td>2016</td>
+<td>OF</td>
+<td>69</td>
+<td>524000.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25475</td>
+<td>treinbl01</td>
+<td>2016</td>
+<td>P</td>
+<td>73</td>
+<td>524900.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">25476</td>
+<td>werthja01</td>
+<td>2016</td>
+<td>OF</td>
+<td>133</td>
+<td>21733615.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25477</td>
+<td>zimmery01</td>
+<td>2016</td>
+<td>1B</td>
+<td>114</td>
+<td>14000000.0</td>
+</tr>
+</tbody>
+</table>
+
+<p>25478 rows × 5 columns</p>
+</div>
+</div>
+</div>
 </section>
 <section id="stretch-questiontask-2" class="level2">
 <h2 class="anchored" data-anchor-id="stretch-questiontask-2">STRETCH QUESTION|TASK 2</h2>

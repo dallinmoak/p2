@@ -135,10 +135,12 @@ Include the following columns:
 
     
 
-_type your results and analysis here_
+_I did a subquery within the fielding table to get the highest single row based on number of games played per player&year, and then attached salary data to that. Looks like a lot of the instances of fielding don't have salary records, so I only included rows that have salary data. next step is to do agregation on that info to get average salary by position. Of course I don't know if those currency amounts are normalized for inflation or anything like that, so agregating that info over a long period is pretty meaningless_
 
 ```{python}
+from p2_source import s1_data
 
+s1_data
 ```
 
 
